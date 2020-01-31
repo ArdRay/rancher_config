@@ -1,7 +1,20 @@
 #cloud-config
-hostname: host-0815
+hostname: lab-01
 ssh_authorized_keys:
   - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINuX2Py5v7WswGOiPvLnBuV+jhDYpl15KrLp9MafgN6e
   
 runcmd:
   - echo "true" > /home/rancher/provisioned
+  
+rancher:
+  network:
+    dns:
+      nameservers:
+        - 1.1.1.1
+        - 1.0.0.1
+      override: true # Override DHCP assigned nameservers
+    interfaces:
+      eth0:
+        dhcp: true
+      eth1:
+        dhcp: true
